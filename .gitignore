@@ -1,3 +1,10 @@
 .vs/
 .vscode/
-
+FI.WebAtividadeEntrevista/obj/
+FI.WebAtividadeEntrevista/bin/
+FI.AtividadeEntrevista/obj/
+FI.AtividadeEntrevista/bin/
+packages/
+FI.WebAtividadeEntrevista/obj/Debug/FI.WebAtividadeEntrevista.csproj.FileListAbsolute.txt
+FI.WebAtividadeEntrevista/obj/Debug/
+FI.WebAtividadeEntrevista/obj/Debug/DesignTimeResolveAssemblyReferencesInput.cache
