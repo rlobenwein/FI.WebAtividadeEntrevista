@@ -58,6 +58,7 @@
 ```
 3. Controladores:
     - Incluir o CPF na lógica dos métodos `Incluir` e `Alterar` (Post e Get):
+
 ```C#
                    model.Id = bo.Incluir(new Cliente()
                 {                    
@@ -72,18 +73,19 @@
                     Telefone = model.Telefone
                     Cpf = model.Cpf //Nova linha - igual nos 3 métodos. 
                 });
-
 ```
-    - Incluir um método para validação do CPF antes da inclusão no BD para garantir a consistência e integridade dos dados (também será adicionada validação no frontend). O método será incluído em uma classe à parte para ser acessada por vários métodos da aplicação.
-    - Criar o controlador BeneficiariosController.cs:
-    - Alterar as procedures para inclusão do CPF
-    - Criar procedures para buscar os beneficiários de um cliente
-    - alterar os métodos de DaoCliente para incluir o cpf
-    - Criar DaoBeneficiario
-    - Criar BoBeneficiario
-    - Criar DML/Beneficiario
-    - incluir em App_Start
-      - BundleConfig - bundles para beneficiario
+
+## Próximos passos
+- Incluir um método para validação do CPF antes da inclusão no BD para garantir a consistência e integridade dos dados (também será adicionada validação no frontend). O método será incluído em uma classe à parte para ser acessada por vários métodos da aplicação.
+- Criar o controlador BeneficiariosController.cs:
+- Alterar as procedures para inclusão do CPF
+- Criar procedures para buscar os beneficiários de um cliente
+- alterar os métodos de DaoCliente para incluir o cpf
+- Criar DaoBeneficiario
+- Criar BoBeneficiario
+- Criar DML/Beneficiario
+- incluir em App_Start
+  - BundleConfig - bundles para beneficiario
 
 
 
