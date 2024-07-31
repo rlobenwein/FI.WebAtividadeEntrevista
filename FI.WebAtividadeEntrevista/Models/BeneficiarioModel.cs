@@ -1,10 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Web;
+﻿using System.ComponentModel.DataAnnotations;
 
-namespace FI.WebAtividadeEntrevista.Models
+namespace WebAtividadeEntrevista.Models
 {
     /// <summary>
     /// Classe de Modelo de Beneficiário
@@ -29,9 +25,8 @@ namespace FI.WebAtividadeEntrevista.Models
         [MaxLength(11)]
         public string Cpf { get; set; }
 
-
         /// <summary>
-        /// Id
+        /// Id do Cliente
         /// </summary>
         [Required]
         public long IdCliente { get; set; }
