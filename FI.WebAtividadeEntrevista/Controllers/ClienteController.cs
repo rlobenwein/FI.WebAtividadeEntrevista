@@ -3,7 +3,6 @@ using WebAtividadeEntrevista.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Web;
 using System.Web.Mvc;
 using FI.AtividadeEntrevista.DML;
 
@@ -43,13 +42,14 @@ namespace WebAtividadeEntrevista.Controllers
                 {                    
                     CEP = model.CEP,
                     Cidade = model.Cidade,
+                    Cpf = model.Cpf,
                     Email = model.Email,
                     Estado = model.Estado,
                     Logradouro = model.Logradouro,
                     Nacionalidade = model.Nacionalidade,
                     Nome = model.Nome,
                     Sobrenome = model.Sobrenome,
-                    Telefone = model.Telefone
+                    Telefone = model.Telefone,
                 });
 
            
@@ -78,13 +78,14 @@ namespace WebAtividadeEntrevista.Controllers
                     Id = model.Id,
                     CEP = model.CEP,
                     Cidade = model.Cidade,
+                    Cpf = model.Cpf,
                     Email = model.Email,
                     Estado = model.Estado,
                     Logradouro = model.Logradouro,
                     Nacionalidade = model.Nacionalidade,
                     Nome = model.Nome,
                     Sobrenome = model.Sobrenome,
-                    Telefone = model.Telefone
+                    Telefone = model.Telefone,
                 });
                                
                 return Json("Cadastro alterado com sucesso");
@@ -105,13 +106,14 @@ namespace WebAtividadeEntrevista.Controllers
                     Id = cliente.Id,
                     CEP = cliente.CEP,
                     Cidade = cliente.Cidade,
+                    Cpf = cliente.Cpf,
                     Email = cliente.Email,
                     Estado = cliente.Estado,
                     Logradouro = cliente.Logradouro,
                     Nacionalidade = cliente.Nacionalidade,
                     Nome = cliente.Nome,
                     Sobrenome = cliente.Sobrenome,
-                    Telefone = cliente.Telefone
+                    Telefone = cliente.Telefone,
                 };
 
             
