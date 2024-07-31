@@ -12,7 +12,7 @@ namespace WebAtividadeEntrevista.Models
     public class ClienteModel
     {
         public long Id { get; set; }
-        
+
         /// <summary>
         /// CEP
         /// </summary>
@@ -67,5 +67,12 @@ namespace WebAtividadeEntrevista.Models
         /// </summary>
         public string Telefone { get; set; }
 
-    }    
+        /// <summary>
+        /// CPF
+        /// </summary>
+        [Required]
+        [MaxLength(11)]
+        public string Cpf { get; set; }
+
+    }
 }
