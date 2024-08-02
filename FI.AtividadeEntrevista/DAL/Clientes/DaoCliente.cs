@@ -27,7 +27,7 @@ namespace FI.AtividadeEntrevista.DAL
             parametros.Add(new System.Data.SqlClient.SqlParameter("Logradouro", cliente.Logradouro));
             parametros.Add(new System.Data.SqlClient.SqlParameter("Email", cliente.Email));
             parametros.Add(new System.Data.SqlClient.SqlParameter("Telefone", cliente.Telefone));
-            parametros.Add(new System.Data.SqlClient.SqlParameter("CPF", cliente.Cpf));
+            parametros.Add(new System.Data.SqlClient.SqlParameter("Cpf", cliente.Cpf));
 
             DataSet ds = base.Consultar("FI_SP_IncClienteV2", parametros);
             long ret = 0;
@@ -37,7 +37,7 @@ namespace FI.AtividadeEntrevista.DAL
         }
 
         /// <summary>
-        /// Inclui um novo cliente
+        /// Consulta um cliente pelo Id
         /// </summary>
         /// <param name="cliente">Objeto de cliente</param>
         internal DML.Cliente Consultar(long Id)
@@ -63,7 +63,7 @@ namespace FI.AtividadeEntrevista.DAL
             return ds.Tables[0].Rows.Count > 0;
         }
 
-        internal List<Cliente> Pesquisa(int iniciarEm, int quantidade, string campoOrdenacao, bool crescente, out int qtd)
+        internal List<Cliente> Pesquisa(int iniciarEm, int quantidade, string campoOrdenacao, bool crescente, out int qtd, bool isForIndex)
         {
             List<System.Data.SqlClient.SqlParameter> parametros = new List<System.Data.SqlClient.SqlParameter>();
 
@@ -72,8 +72,9 @@ namespace FI.AtividadeEntrevista.DAL
             parametros.Add(new System.Data.SqlClient.SqlParameter("campoOrdenacao", campoOrdenacao));
             parametros.Add(new System.Data.SqlClient.SqlParameter("crescente", crescente));
 
-            DataSet ds = base.Consultar("FI_SP_PesqCliente", parametros);
-            List<DML.Cliente> cli = Converter(ds);
+            DataSet ds = isForIndex ? Consultar("FI_SP_PesqClienteSimples", parametros) : Consultar("FI_SP_PesqCliente", parametros);
+            //DataSet ds = Consultar("FI_SP_PesqCliente", parametros);
+            List<DML.Cliente> cli = Converter(ds, isForIndex);
 
             int iQtd = 0;
 
@@ -144,7 +145,7 @@ namespace FI.AtividadeEntrevista.DAL
             {
                 foreach (DataRow row in ds.Tables[0].Rows)
                 {
-                    DML.Cliente cli = new DML.Cliente();
+                    DML.Cliente cli = new DML.Cliente() { Beneficiarios = new List<Beneficiario>() };
                     cli.Id = row.Field<long>("Id");
                     cli.CEP = row.Field<string>("CEP");
                     cli.Cidade = row.Field<string>("Cidade");
@@ -156,6 +157,29 @@ namespace FI.AtividadeEntrevista.DAL
                     cli.Sobrenome = row.Field<string>("Sobrenome");
                     cli.Telefone = row.Field<string>("Telefone");
                     cli.Cpf = row.Field<string>("CPF");
+                    lista.Add(cli);
+                }
+            }
+
+            return lista;
+        }
+        /// <summary>
+        /// Converte os dados do Cliente para a Lista (Index), que requer somente Id, Nome e Email
+        /// </summary>
+        /// <param name="ds"></param>
+        /// <param name="isForIndex"></param>
+        /// <returns></returns>
+        private List<DML.Cliente> Converter(DataSet ds, bool isForIndex)
+        {
+            List<DML.Cliente> lista = new List<DML.Cliente>();
+            if (ds != null && ds.Tables != null && ds.Tables.Count > 0 && ds.Tables[0].Rows.Count > 0)
+            {
+                foreach (DataRow row in ds.Tables[0].Rows)
+                {
+                    DML.Cliente cli = new DML.Cliente();
+                    cli.Id = row.Field<long>("Id");
+                    cli.Email = row.Field<string>("Email");
+                    cli.Nome = row.Field<string>("Nome");
                     lista.Add(cli);
                 }
             }

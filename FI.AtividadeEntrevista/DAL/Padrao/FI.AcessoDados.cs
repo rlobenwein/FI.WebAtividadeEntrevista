@@ -1,7 +1,9 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Configuration;
 using System.Data;
 using System.Data.SqlClient;
+using System.Diagnostics;
 
 namespace FI.AtividadeEntrevista.DAL
 {
@@ -49,7 +51,10 @@ namespace FI.AtividadeEntrevista.DAL
             comando.CommandType = CommandType.StoredProcedure;
             comando.CommandText = NomeProcedure;
             foreach (var item in parametros)
+            {
                 comando.Parameters.Add(item);
+                Debug.WriteLine($"Parameter: {item.ParameterName}, Value: {item.Value}");
+            }
 
             SqlDataAdapter adapter = new SqlDataAdapter(comando);
             DataSet ds = new DataSet();
