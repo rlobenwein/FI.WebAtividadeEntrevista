@@ -48,21 +48,23 @@ namespace FI.AtividadeEntrevista.BLL
         }
 
         /// <summary>
-        /// Lista os beneficiarios
+        /// Lista os beneficiarios do Cliente
         /// </summary>
-        public List<DML.Beneficiario> Listar()
+        /// <param name="id">id do cliente</param>
+        /// <returns>List<DML.Beneficiario></returns>
+        public List<DML.Beneficiario> Listar(long id)
         {
             DaoBeneficiario ben = new DaoBeneficiario();
-            return ben.Listar();
+            return ben.Listar(id);
         }
 
         /// <summary>
         /// Lista os beneficiarios
         /// </summary>
-        public List<DML.Beneficiario> Pesquisa(int iniciarEm, int quantidade, string campoOrdenacao, bool crescente, out int qtd)
+        public List<DML.Beneficiario> Pesquisa(int iniciarEm, int quantidade, string campoOrdenacao, bool crescente, out int qtd,long idCliente)
         {
             DaoBeneficiario ben = new DaoBeneficiario();
-            return ben.Pesquisa(iniciarEm, quantidade, campoOrdenacao, crescente, out qtd);
+            return ben.Pesquisa(iniciarEm, quantidade, campoOrdenacao, crescente, out qtd, idCliente);
         }
 
         /// <summary>
