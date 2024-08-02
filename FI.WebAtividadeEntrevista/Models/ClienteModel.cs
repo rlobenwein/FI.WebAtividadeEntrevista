@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 
 namespace WebAtividadeEntrevista.Models
 {
@@ -70,5 +71,9 @@ namespace WebAtividadeEntrevista.Models
         [MaxLength(11)]
         public string Cpf { get; set; }
 
+        /// <summary>
+        /// Lista dos beneficiários do CLiente
+        /// </summary>
+        public List<BeneficiarioModel> Beneficiarios { get; set; }
     }
 }
