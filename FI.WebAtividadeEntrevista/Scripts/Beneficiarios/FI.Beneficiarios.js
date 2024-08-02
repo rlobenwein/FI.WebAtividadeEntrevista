@@ -1,33 +1,39 @@
 ﻿
 $(document).ready(function () {
-    $('#formCadastro').submit(function (e) {
+    $('#formCadastroBeneficiario').submit(function (e) {
+        console.log('IdCliente:',$(this).find("#IdCliente").val());
         e.preventDefault();
         $.ajax({
             url: urlPost,
             method: "POST",
             data: {
-                "NOME": $(this).find("#Nome").val(),
-                "CPF": $(this).find("#CPF").val(),
+                "NOME": $(this).find("#NomeBen").val(),
+                "CPF": $(this).find("#CpfBen").val(),
                 "IdCliente": $(this).find("#IdCliente").val()
             },
             error:
             function (r) {
                 if (r.status == 400)
-                    ModalDialog("Ocorreu um erro", r.responseJSON);
+                {
+                    ModalDialogBen("Ocorreu um erro", r.responseJSON);
+                    console.log(r.responseJSON);
+                }
                 else if (r.status == 500)
-                    ModalDialog("Ocorreu um erro", "Ocorreu um erro interno no servidor.");
+                    ModalDialogBen("Ocorreu um erro", "Ocorreu um erro interno no servidor.");
             },
             success:
             function (r) {
-                ModalDialog("Sucesso!", r)
-                $("#formCadastro")[0].reset();
+                ModalDialogBen("Sucesso!", r);
+                console.log("Modal open");
+                $("#formCadastroBeneficiario")[0].reset();
             }
         });
     })
     
 })
 
-function ModalDialog(titulo, texto) {
+function ModalDialogBen(titulo, texto) {
+    console.log("Modal Open Ben");
     var random = Math.random().toString().replace('.', '');
     var texto = '<div id="' + random + '" class="modal fade">                                                               ' +
         '        <div class="modal-dialog">                                                                                 ' +

@@ -1,12 +1,13 @@
 ﻿
 $(document).ready(function () {
+    console.log('Alterar Ben');
     if (obj) {
-        $('#formCadastro #Nome').val(obj.Nome);
-        $('#formCadastro #CPF').val(obj.Cpf);
-        $('#formCadastro #IdCliente').val(obj.IdCliente);
+        $('#formCadastroBeneficiario #Nome').val(obj.Nome);
+        $('#formCadastroBeneficiario #Cpf').val(obj.Cpf);
+        $('#formCadastroBeneficiario #IdCliente').val(obj.IdCliente);
     }
 
-    $('#formCadastro').submit(function (e) {
+    $('#formCadastroBeneficiario').submit(function (e) {
         e.preventDefault();
         
         $.ajax({
@@ -14,20 +15,20 @@ $(document).ready(function () {
             method: "POST",
             data: {
                 "NOME": $(this).find("#Nome").val(),
-                "Cpf": $(this).find("#CPF").val(),
+                "Cpf": $(this).find("#Cpf").val(),
                 "IdCliente": $(this).find("#IdCliente").val()
             },
             error:
             function (r) {
                 if (r.status == 400)
-                    ModalDialog("Ocorreu um erro", r.responseJSON);
+                    ModalDialogBen("Ocorreu um erro", r.responseJSON);
                 else if (r.status == 500)
-                    ModalDialog("Ocorreu um erro", "Ocorreu um erro interno no servidor.");
+                    ModalDialogBen("Ocorreu um erro", "Ocorreu um erro interno no servidor.");
             },
             success:
             function (r) {
-                ModalDialog("Sucesso!", r)
-                $("#formCadastro")[0].reset();                                
+                ModalDialogBen("Sucesso!", r)
+                $("#formCadastroBeneficiario")[0].reset();                                
                 window.location.href = urlRetorno;
             }
         });
@@ -35,7 +36,8 @@ $(document).ready(function () {
     
 })
 
-function ModalDialog(titulo, texto) {
+function ModalDialogBen(titulo, texto) {
+    console.log("Modal Open Ben");
     var random = Math.random().toString().replace('.', '');
     var texto = '<div id="' + random + '" class="modal fade">                                                               ' +
         '        <div class="modal-dialog">                                                                                 ' +

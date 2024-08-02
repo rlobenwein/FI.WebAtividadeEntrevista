@@ -1,15 +1,15 @@
 ﻿
 $(document).ready(function () {
-
-    if (document.getElementById("gridClientes"))
-        $('#gridClientes').jtable({
-            title: 'Clientes',
+    console.log("beneficiarioList");
+    if (document.getElementById("gridBeneficiarios"))
+        $('#gridBeneficiarios').jtable({
+            title: 'Beneficiarios',
             paging: true, //Enable paging
             pageSize: 5, //Set page size (default: 10)
             sorting: true, //Enable sorting
             defaultSorting: 'Nome ASC', //Set default sorting
             actions: {
-                listAction: urlClienteList,
+                listAction: urlBeneficiariosList,
             },
             fields: {
                 Nome: {
@@ -17,7 +17,7 @@ $(document).ready(function () {
                     width: '50%'
                 },
                 Email: {
-                    title: 'Email',
+                    title: 'CPF',
                     width: '35%'
                 },
                 Alterar: {
@@ -30,6 +30,6 @@ $(document).ready(function () {
         });
 
     //Load student list from server
-    if (document.getElementById("gridClientes"))
-        $('#gridClientes').jtable('load');
+    if (document.getElementById("gridBeneficiarios"))
+        $('#gridBeneficiarios').jtable('load');
 })

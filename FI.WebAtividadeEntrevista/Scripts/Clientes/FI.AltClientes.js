@@ -1,19 +1,19 @@
 ﻿
 $(document).ready(function () {
     if (obj) {
-        $('#formCadastro #Nome').val(obj.Nome);
-        $('#formCadastro #CEP').val(obj.CEP);
-        $('#formCadastro #Email').val(obj.Email);
-        $('#formCadastro #Sobrenome').val(obj.Sobrenome);
-        $('#formCadastro #Nacionalidade').val(obj.Nacionalidade);
-        $('#formCadastro #Estado').val(obj.Estado);
-        $('#formCadastro #Cidade').val(obj.Cidade);
-        $('#formCadastro #Logradouro').val(obj.Logradouro);
-        $('#formCadastro #Telefone').val(obj.Telefone);
-        $('#formCadastro #CPF').val(obj.Cpf);
+        $('#formCadastroCliente #Nome').val(obj.Nome);
+        $('#formCadastroCliente #CEP').val(obj.CEP);
+        $('#formCadastroCliente #Email').val(obj.Email);
+        $('#formCadastroCliente #Sobrenome').val(obj.Sobrenome);
+        $('#formCadastroCliente #Nacionalidade').val(obj.Nacionalidade);
+        $('#formCadastroCliente #Estado').val(obj.Estado);
+        $('#formCadastroCliente #Cidade').val(obj.Cidade);
+        $('#formCadastroCliente #Logradouro').val(obj.Logradouro);
+        $('#formCadastroCliente #Telefone').val(obj.Telefone);
+        $('#formCadastroCliente #CPF').val(obj.Cpf);
     }
 
-    $('#formCadastro').submit(function (e) {
+    $('#formCadastroCliente').submit(function (e) {
         e.preventDefault();
 
         $.ajax({
@@ -34,14 +34,14 @@ $(document).ready(function () {
             error:
                 function (r) {
                     if (r.status == 400)
-                        ModalDialog("Ocorreu um erro", r.responseJSON);
+                        ModalDialogCli("Ocorreu um erro", r.responseJSON);
                     else if (r.status == 500)
-                        ModalDialog("Ocorreu um erro", "Ocorreu um erro interno no servidor.");
+                        ModalDialogCli("Ocorreu um erro", "Ocorreu um erro interno no servidor.");
                 },
             success:
                 function (r) {
-                    ModalDialog("Sucesso!", r)
-                    $("#formCadastro")[0].reset();
+                    ModalDialogCli("Sucesso!", r)
+                    $("#formCadastroCliente")[0].reset();
                     window.location.href = urlRetorno;
                 }
         });
@@ -49,7 +49,8 @@ $(document).ready(function () {
 
 })
 
-function ModalDialog(titulo, texto) {
+function ModalDialogCli(titulo, texto) {
+    console.log("Modal Open Cli alt");
     var random = Math.random().toString().replace('.', '');
     var texto = '<div id="' + random + '" class="modal fade">                                                               ' +
         '        <div class="modal-dialog">                                                                                 ' +

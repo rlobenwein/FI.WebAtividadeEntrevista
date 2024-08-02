@@ -1,42 +1,36 @@
 ﻿
 $(document).ready(function () {
-    $('#formCadastroCliente').submit(function (e) {
-        console.log("Submit cli");
+    console.log('Excluir Ben');
+
+    $('.excluirBen').on('click', function (e) {
+
         e.preventDefault();
+        
         $.ajax({
             url: urlPost,
-            method: "POST",
+            method: "DELETE",
             data: {
-                "NOME": $(this).find("#Nome").val(),
-                "CEP": $(this).find("#CEP").val(),
-                "Email": $(this).find("#Email").val(),
-                "Sobrenome": $(this).find("#Sobrenome").val(),
-                "Nacionalidade": $(this).find("#Nacionalidade").val(),
-                "Estado": $(this).find("#Estado").val(),
-                "Cidade": $(this).find("#Cidade").val(),
-                "Logradouro": $(this).find("#Logradouro").val(),
-                "Telefone": $(this).find("#Telefone").val(),
-                "Cpf": $(this).find("#CPF").val()
+                "Id": $(this).val()
             },
             error:
             function (r) {
                 if (r.status == 400)
-                    ModalDialogCli("Ocorreu um erro", r.responseJSON);
+                    ModalDialogBen("Ocorreu um erro", r.responseJSON);
                 else if (r.status == 500)
-                    ModalDialogCli("Ocorreu um erro", "Ocorreu um erro interno no servidor.");
+                    ModalDialogBen("Ocorreu um erro", "Ocorreu um erro interno no servidor.");
             },
             success:
             function (r) {
-                ModalDialogCli("Sucesso!", r)
-                $("#formCadastroCliente")[0].reset();
+                ModalDialogBen("Sucesso!", r)
+                window.location.href = urlRetorno;
             }
         });
     })
     
 })
 
-function ModalDialogCli(titulo, texto) {
-    console.log("Modal Open Cli new");
+function ModalDialogBen(titulo, texto) {
+    console.log("Modal Open Ben");
     var random = Math.random().toString().replace('.', '');
     var texto = '<div id="' + random + '" class="modal fade">                                                               ' +
         '        <div class="modal-dialog">                                                                                 ' +
