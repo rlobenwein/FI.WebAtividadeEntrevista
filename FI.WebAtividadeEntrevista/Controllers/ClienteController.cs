@@ -14,8 +14,6 @@ namespace WebAtividadeEntrevista.Controllers
         {
             return View();
         }
-
-
         public ActionResult Incluir()
         {
             return View();
@@ -25,7 +23,7 @@ namespace WebAtividadeEntrevista.Controllers
         public JsonResult Incluir(ClienteModel model)
         {
             BoCliente bo = new BoCliente();
-            
+
             if (!this.ModelState.IsValid)
             {
                 List<string> erros = (from item in ModelState.Values
@@ -37,9 +35,9 @@ namespace WebAtividadeEntrevista.Controllers
             }
             else
             {
-                
+
                 model.Id = bo.Incluir(new Cliente()
-                {                    
+                {
                     CEP = model.CEP,
                     Cidade = model.Cidade,
                     Cpf = model.Cpf,
@@ -52,7 +50,7 @@ namespace WebAtividadeEntrevista.Controllers
                     Telefone = model.Telefone,
                 });
 
-           
+
                 return Json("Cadastro efetuado com sucesso");
             }
         }
@@ -61,7 +59,7 @@ namespace WebAtividadeEntrevista.Controllers
         public JsonResult Alterar(ClienteModel model)
         {
             BoCliente bo = new BoCliente();
-       
+
             if (!this.ModelState.IsValid)
             {
                 List<string> erros = (from item in ModelState.Values
@@ -87,7 +85,7 @@ namespace WebAtividadeEntrevista.Controllers
                     Sobrenome = model.Sobrenome,
                     Telefone = model.Telefone,
                 });
-                               
+
                 return Json("Cadastro alterado com sucesso");
             }
         }
@@ -95,8 +93,8 @@ namespace WebAtividadeEntrevista.Controllers
         [HttpGet]
         public ActionResult Alterar(long id)
         {
-            BoCliente bo = new BoCliente();
-            Cliente cliente = bo.Consultar(id);
+            BoCliente boCliente = new BoCliente();
+            Cliente cliente = boCliente.Consultar(id);
             Models.ClienteModel model = null;
 
             if (cliente != null)
@@ -114,13 +112,25 @@ namespace WebAtividadeEntrevista.Controllers
                     Nome = cliente.Nome,
                     Sobrenome = cliente.Sobrenome,
                     Telefone = cliente.Telefone,
+                    Beneficiarios = new List<BeneficiarioModel>()
                 };
-
-            
             }
+            BoBeneficiario boBeneficiario = new BoBeneficiario();
+            List<Beneficiario> listaBen = boBeneficiario.Listar(id);
+            foreach (var ben in listaBen)
+            {
+                model.Beneficiarios.Add(new BeneficiarioModel()
+                {
+                    Id = ben.Id,
+                    Nome = ben.Nome,
+                    Cpf = ben.Cpf,
+                    IdCliente = ben.IdCliente
+                });
 
+            }
             return View(model);
         }
+
 
         [HttpPost]
         public JsonResult ClienteList(int jtStartIndex = 0, int jtPageSize = 0, string jtSorting = null)
@@ -131,6 +141,7 @@ namespace WebAtividadeEntrevista.Controllers
                 string campo = string.Empty;
                 string crescente = string.Empty;
                 string[] array = jtSorting.Split(' ');
+                bool isForIndex = true;
 
                 if (array.Length > 0)
                     campo = array[0];
@@ -138,7 +149,8 @@ namespace WebAtividadeEntrevista.Controllers
                 if (array.Length > 1)
                     crescente = array[1];
 
-                List<Cliente> clientes = new BoCliente().Pesquisa(jtStartIndex, jtPageSize, campo, crescente.Equals("ASC", StringComparison.InvariantCultureIgnoreCase), out qtd);
+                List<Cliente> clientes = new BoCliente().Pesquisa(jtStartIndex, jtPageSize, campo, crescente.Equals("ASC", StringComparison.InvariantCultureIgnoreCase), out qtd, isForIndex);
+                //List<Cliente> clientes = new BoCliente().Pesquisa(jtStartIndex, jtPageSize, campo, crescente.Equals("ASC", StringComparison.InvariantCultureIgnoreCase), out qtd);
 
                 //Return result to jTable
                 return Json(new { Result = "OK", Records = clientes, TotalRecordCount = qtd });
