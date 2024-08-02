@@ -181,7 +181,9 @@
     <Content Include="favicon.ico" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
+    <Content Include="libman.json" />
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
+    <Content Include="Scripts\Beneficiarios\FI.DelBeneficiarios.js" />
     <Content Include="Scripts\Beneficiarios\FI.AltBeneficiarios.js" />
     <Content Include="Scripts\Beneficiarios\FI.Beneficiarios.js" />
     <Content Include="Scripts\Beneficiarios\FI.ListBeneficiarios.js" />
@@ -230,6 +232,7 @@
     <Content Include="Scripts\jtable\localization\jquery.jtable.tr.js" />
     <Content Include="Scripts\jtable\localization\jquery.jtable.vi.js" />
     <Content Include="Scripts\jtable\localization\jquery.jtable.zh-CN.js" />
+    <Content Include="Scripts\Site.js" />
     <Content Include="Scripts\jtable\themes\basic\close.png" />
     <Content Include="Scripts\jtable\themes\basic\column-asc.png" />
     <Content Include="Scripts\jtable\themes\basic\column-desc.png" />

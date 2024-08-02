@@ -1,0 +1,6 @@
+E:\OneDrive\Documentos\00 - Profissionais\Candidaturas\Função Sistemas\FI.WebAtividadeEntrevista\FI.AtividadeEntrevista\bin\Debug\FI.AtividadeEntrevista.dll
+E:\OneDrive\Documentos\00 - Profissionais\Candidaturas\Função Sistemas\FI.WebAtividadeEntrevista\FI.AtividadeEntrevista\bin\Debug\FI.AtividadeEntrevista.pdb
+E:\OneDrive\Documentos\00 - Profissionais\Candidaturas\Função Sistemas\FI.WebAtividadeEntrevista\FI.AtividadeEntrevista\obj\Debug\FI.AtividadeEntrevista.csproj.AssemblyReference.cache
+E:\OneDrive\Documentos\00 - Profissionais\Candidaturas\Função Sistemas\FI.WebAtividadeEntrevista\FI.AtividadeEntrevista\obj\Debug\FI.AtividadeEntrevista.csproj.CoreCompileInputs.cache
+E:\OneDrive\Documentos\00 - Profissionais\Candidaturas\Função Sistemas\FI.WebAtividadeEntrevista\FI.AtividadeEntrevista\obj\Debug\FI.AtividadeEntrevista.dll
+E:\OneDrive\Documentos\00 - Profissionais\Candidaturas\Função Sistemas\FI.WebAtividadeEntrevista\FI.AtividadeEntrevista\obj\Debug\FI.AtividadeEntrevista.pdb
