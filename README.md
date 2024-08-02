@@ -5,7 +5,7 @@
 
 #### Backend
 
-1. Modelo Cliente: incluir a propriedade CPF com a anotação ```Required``` para tornar o campo obrigatório
+1. Modelo Cliente: incluir a propriedade CPF com a anotação ```Required``` para tornar o campo obrigatório e a anotação ```[MaxLength(11)]``` para limitar o campo em 11 caracteres.
 
 - Arquivo `FI.WebAtividadeEntrevista\FI.WebAtividadeEntrevista\Models\ClienteModel.cs`
 ```C#
@@ -37,11 +37,10 @@
 ```C#
     public class Beneficiarios
     {
-        [key]
         public long Id {get; set;} // tipo long para corresponder ao tipo bigint da tabela existente
 
-        [MaxLength(11)]
         [Required]
+        [MaxLength(11)]
         public string Cpf {get; set;} 
 
         [Required]
@@ -56,7 +55,7 @@
     ALTER TABLE dbo.BENEFICIARIOS
     ADD CONSTRAINT FK_BENEFICIARIOS_CLIENTES FOREIGN KEY (IDCLIENTE) REFERENCES dbo.CLIENTES(ID);
 ```
-3. Controladores:
+1. Controladores:
     - Incluir o CPF na lógica dos métodos `Incluir` e `Alterar` (Post e Get):
 
 ```C#
@@ -76,7 +75,6 @@
 ```
 
 ## Próximos passos
-- Incluir um método para validação do CPF antes da inclusão no BD para garantir a consistência e integridade dos dados (também será adicionada validação no frontend). O método será incluído em uma classe à parte para ser acessada por vários métodos da aplicação.
 - Criar o controlador BeneficiariosController.cs:
 - Alterar as procedures para inclusão do CPF
 - Criar procedures para buscar os beneficiários de um cliente
@@ -84,9 +82,11 @@
 - Criar DaoBeneficiario
 - Criar BoBeneficiario
 - Criar DML/Beneficiario
+- Consulta beneficiarios por cliente
 - incluir em App_Start
   - BundleConfig - bundles para beneficiario
 
+- Incluir um método para validação do CPF antes da inclusão no BD para garantir a consistência e integridade dos dados (também será adicionada validação no frontend). O método será incluído em uma classe à parte para ser acessada por vários métodos da aplicação.
 
 
 #### Frontend
