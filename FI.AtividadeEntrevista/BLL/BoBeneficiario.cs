@@ -1,5 +1,7 @@
 ﻿using System.Collections.Generic;
 using FI.AtividadeEntrevista.DAL;
+using FI.AtividadeEntrevista.Interfaces;
+using FI.AtividadeEntrevista.Utilities;
 
 namespace FI.AtividadeEntrevista.BLL
 {
@@ -76,6 +78,16 @@ namespace FI.AtividadeEntrevista.BLL
         {
             DaoBeneficiario ben = new DaoBeneficiario();
             return ben.VerificarExistencia(CPF);
+        }
+        /// <summary>
+        /// Verifica se o CPF é válido
+        /// </summary>
+        /// <param name="cpf"></param>
+        /// <returns></returns>
+        public bool VerificaValidade(string cpf)
+        {
+            IValidadorCpf validaCpf = new ValidadorCpf();
+            return validaCpf.IsValid(cpf);
         }
 
     }

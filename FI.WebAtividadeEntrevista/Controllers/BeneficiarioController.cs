@@ -43,7 +43,10 @@ namespace WebAtividadeEntrevista.Controllers
         public JsonResult Incluir(BeneficiarioModel model)
         {
             BoBeneficiario bo = new BoBeneficiario();
-
+            if (!bo.VerificaValidade(model.Cpf))
+            {
+                ModelState.AddModelError("Cpf", "CPF já cadastrado.");
+            }
             if (!this.ModelState.IsValid)
             {
                 List<string> erros = (from item in ModelState.Values

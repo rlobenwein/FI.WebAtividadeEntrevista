@@ -23,6 +23,10 @@ namespace WebAtividadeEntrevista.Controllers
         public JsonResult Incluir(ClienteModel model)
         {
             BoCliente bo = new BoCliente();
+            if (!bo.VerificaValidade(model.Cpf))
+            {
+                ModelState.AddModelError("Cpf", "CPF inválido.");
+            }
 
             if (!this.ModelState.IsValid)
             {

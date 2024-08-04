@@ -1,4 +1,6 @@
-﻿using System.Collections.Generic;
+﻿using FI.AtividadeEntrevista.Interfaces;
+using FI.AtividadeEntrevista.Utilities;
+using System.Collections.Generic;
 
 namespace FI.AtividadeEntrevista.BLL
 {
@@ -65,7 +67,7 @@ namespace FI.AtividadeEntrevista.BLL
         }
 
         /// <summary>
-        /// VerificaExistencia
+        /// Verifica Existencia do CPF
         /// </summary>
         /// <param name="CPF"></param>
         /// <returns></returns>
@@ -73,6 +75,16 @@ namespace FI.AtividadeEntrevista.BLL
         {
             DAL.DaoCliente cli = new DAL.DaoCliente();
             return cli.VerificarExistencia(CPF);
+        }
+        /// <summary>
+        /// Verifica se o CPF é válido
+        /// </summary>
+        /// <param name="cpf"></param>
+        /// <returns></returns>
+        public bool VerificaValidade(string cpf)
+        {
+            IValidadorCpf validaCpf = new ValidadorCpf();
+            return validaCpf.IsValid(cpf);
         }
     }
 }

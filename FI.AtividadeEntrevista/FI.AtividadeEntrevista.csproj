@@ -44,12 +44,15 @@
   <ItemGroup>
     <Compile Include="BLL\BoBeneficiario.cs" />
     <Compile Include="BLL\BoCliente.cs" />
+    <Compile Include="BLL\Services\CpfValidationService.cs" />
     <Compile Include="DAL\Beneficiarios\DaoBeneficiario.cs" />
     <Compile Include="DAL\Clientes\DaoCliente.cs" />
     <Compile Include="DAL\Padrao\FI.AcessoDados.cs" />
     <Compile Include="DML\Beneficiario.cs" />
     <Compile Include="DML\Cliente.cs" />
+    <Compile Include="Interfaces\IValidadorCpf.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Utilities\ValidadorCpf.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="DAL\Beneficiarios\Procedures\FI_SP_AltBeneficiario.sql" />
