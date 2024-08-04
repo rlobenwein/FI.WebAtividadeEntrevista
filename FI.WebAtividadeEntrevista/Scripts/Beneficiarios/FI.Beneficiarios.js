@@ -1,35 +1,43 @@
 ﻿
 $(document).ready(function () {
-    $('#formCadastroBeneficiario').submit(function (e) {
-        console.log('IdCliente:',$(this).find("#IdCliente").val());
-        e.preventDefault();
-        $.ajax({
-            url: urlPost,
-            method: "POST",
-            data: {
-                "NOME": $(this).find("#NomeBen").val(),
-                "CPF": $(this).find("#CpfBen").val(),
-                "IdCliente": $(this).find("#IdCliente").val()
-            },
-            error:
-            function (r) {
-                if (r.status == 400)
-                {
-                    ModalDialogBen("Ocorreu um erro", r.responseJSON);
-                    console.log(r.responseJSON);
-                }
-                else if (r.status == 500)
-                    ModalDialogBen("Ocorreu um erro", "Ocorreu um erro interno no servidor.");
-            },
-            success:
-            function (r) {
-                ModalDialogBen("Sucesso!", r);
-                console.log("Modal open");
-                $("#formCadastroBeneficiario")[0].reset();
-            }
-        });
+        $("#CPF").on('change', function () {
+        var cpf = $('#CPF').val();
+        console.log(cpf);
+        console.log(validaCPF(cpf));
     })
-    
+
+    $('#formCadastroBeneficiario').submit(function (e) {
+        e.preventDefault();
+        if (validaCPF($(this).find("#CPF").val())) {
+            $.ajax({
+                url: urlPost,
+                method: "POST",
+                data: {
+                    "NOME": $(this).find("#Nome").val(),
+                    "CPF": $(this).find("#CPF").val(),
+                    "IdCliente": $(this).find("#IdCliente").val()
+                },
+                error:
+                    function (r) {
+                        if (r.status == 400) {
+                            ModalDialogBen("Ocorreu um erro", r.responseJSON);
+                            console.log(r.responseJSON);
+                        }
+                        else if (r.status == 500)
+                            ModalDialogBen("Ocorreu um erro", "Ocorreu um erro interno no servidor.");
+                    },
+                success:
+                    function (r) {
+                        ModalDialogBen("Sucesso!", r);
+                        console.log("Modal open");
+                        $("#formCadastroBeneficiario")[0].reset();
+                    }
+            });
+        } else {
+            alert("Insira um CPF válido");
+        }
+    })
+
 })
 
 function ModalDialogBen(titulo, texto) {

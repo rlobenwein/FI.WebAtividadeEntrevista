@@ -1,38 +1,42 @@
 ﻿
 $(document).ready(function () {
+
     $('#formCadastroCliente').submit(function (e) {
-        console.log("Submit cli");
         e.preventDefault();
-        $.ajax({
-            url: urlPost,
-            method: "POST",
-            data: {
-                "NOME": $(this).find("#Nome").val(),
-                "CEP": $(this).find("#CEP").val(),
-                "Email": $(this).find("#Email").val(),
-                "Sobrenome": $(this).find("#Sobrenome").val(),
-                "Nacionalidade": $(this).find("#Nacionalidade").val(),
-                "Estado": $(this).find("#Estado").val(),
-                "Cidade": $(this).find("#Cidade").val(),
-                "Logradouro": $(this).find("#Logradouro").val(),
-                "Telefone": $(this).find("#Telefone").val(),
-                "Cpf": $(this).find("#CPF").val()
-            },
-            error:
-            function (r) {
-                if (r.status == 400)
-                    ModalDialogCli("Ocorreu um erro", r.responseJSON);
-                else if (r.status == 500)
-                    ModalDialogCli("Ocorreu um erro", "Ocorreu um erro interno no servidor.");
-            },
-            success:
-            function (r) {
-                ModalDialogCli("Sucesso!", r)
-                $("#formCadastroCliente")[0].reset();
-            }
-        });
+        if (validaCPF($(this).find("#CPF").val())) {
+            $.ajax({
+                url: urlPost,
+                method: "POST",
+                data: {
+                    "NOME": $(this).find("#Nome").val(),
+                    "CEP": $(this).find("#CEP").val(),
+                    "Email": $(this).find("#Email").val(),
+                    "Sobrenome": $(this).find("#Sobrenome").val(),
+                    "Nacionalidade": $(this).find("#Nacionalidade").val(),
+                    "Estado": $(this).find("#Estado").val(),
+                    "Cidade": $(this).find("#Cidade").val(),
+                    "Logradouro": $(this).find("#Logradouro").val(),
+                    "Telefone": $(this).find("#Telefone").val(),
+                    "Cpf": $(this).find("#CPF").val()
+                },
+                error:
+                    function (r) {
+                        if (r.status == 400)
+                            ModalDialogCli("Ocorreu um erro", r.responseJSON);
+                        else if (r.status == 500)
+                            ModalDialogCli("Ocorreu um erro", "Ocorreu um erro interno no servidor.");
+                    },
+                success:
+                    function (r) {
+                        ModalDialogCli("Sucesso!", r)
+                        $("#formCadastroCliente")[0].reset();
+                    }
+            });
+        } else {
+            alert("Insira um CPF válido");
+        }
     })
-    
+
 })
 
 function ModalDialogCli(titulo, texto) {

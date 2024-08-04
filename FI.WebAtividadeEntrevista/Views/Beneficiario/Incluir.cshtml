@@ -11,6 +11,7 @@
         console.log(urlBeneficiariosList);
         var obj = @Html.Raw(Json.Encode(Model));
     </script>
+    @Scripts.Render("~/bundles/beneficiarios")
 
 }
 <h2>@Html.Raw(ViewBag.Title)</h2>
@@ -28,15 +29,15 @@
         </tr>
     </thead>
     <tbody>
-        @foreach(var ben in Model.Beneficiarios)
-            {
-        <tr>
-            <td>@ben.Nome</td>
-            <td>@ben.Cpf</td>
-            <td>@Html.ActionLink("Alterar", "Alterar", "Beneficiario", new { id = ben.Id}, new { @class = "btn btn-sm btn-primary pull-right" })</td>
-            <td>@Html.ActionLink("Excluir", "Excluir", "Beneficiario", new { id = ben.Id}, new { @class = "btn btn-sm btn-primary pull-right" })</td>
-        </tr>
-                
-            }
+        @foreach (var ben in Model.Beneficiarios)
+        {
+            <tr>
+                <td>@ben.Nome</td>
+                <td>@ben.Cpf</td>
+                <td>@Html.ActionLink("Alterar", "Alterar", "Beneficiario", new { id = ben.Id }, new { @class = "btn btn-sm btn-primary pull-right" })</td>
+                <td>@Html.ActionLink("Excluir", "Excluir", "Beneficiario", new { id = ben.Id }, new { @class = "btn btn-sm btn-primary pull-right" })</td>
+            </tr>
+
+        }
     </tbody>
 </table>

@@ -3,19 +3,19 @@ $(document).ready(function () {
     console.log('Alterar Ben');
     if (obj) {
         $('#formCadastroBeneficiario #Nome').val(obj.Nome);
-        $('#formCadastroBeneficiario #Cpf').val(obj.Cpf);
+        $('#formCadastroBeneficiario #CPF').val(obj.Cpf);
         $('#formCadastroBeneficiario #IdCliente').val(obj.IdCliente);
     }
 
     $('#formCadastroBeneficiario').submit(function (e) {
-        e.preventDefault();
+        //e.preventDefault();
         
         $.ajax({
             url: urlPost,
             method: "POST",
             data: {
                 "NOME": $(this).find("#Nome").val(),
-                "Cpf": $(this).find("#Cpf").val(),
+                "CPF": $(this).find("#CPF").val(),
                 "IdCliente": $(this).find("#IdCliente").val()
             },
             error:
@@ -37,7 +37,6 @@ $(document).ready(function () {
 })
 
 function ModalDialogBen(titulo, texto) {
-    console.log("Modal Open Ben");
     var random = Math.random().toString().replace('.', '');
     var texto = '<div id="' + random + '" class="modal fade">                                                               ' +
         '        <div class="modal-dialog">                                                                                 ' +
