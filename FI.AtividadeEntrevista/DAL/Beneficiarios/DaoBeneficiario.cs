@@ -28,11 +28,11 @@ namespace FI.AtividadeEntrevista.DAL
                 long.TryParse(ds.Tables[0].Rows[0][0].ToString(), out ret);
             return ret;
         }
-
         /// <summary>
-        /// Inclui um novo beneficiario
+        /// Consulta beneficiário pelo id
         /// </summary>
-        /// <param name="beneficiario">Objeto de beneficiario</param>
+        /// <param name="Id"></param>
+        /// <returns></returns>
         internal DML.Beneficiario Consultar(long Id)
         {
             List<System.Data.SqlClient.SqlParameter> parametros = new List<System.Data.SqlClient.SqlParameter>();
@@ -44,7 +44,11 @@ namespace FI.AtividadeEntrevista.DAL
 
             return ben.FirstOrDefault();
         }
-
+        /// <summary>
+        /// Verifica se o CPF existe no Banco de dados
+        /// </summary>
+        /// <param name="CPF"></param>
+        /// <returns></returns>
         internal bool VerificarExistencia(string CPF)
         {
             List<System.Data.SqlClient.SqlParameter> parametros = new List<System.Data.SqlClient.SqlParameter>();
@@ -99,7 +103,7 @@ namespace FI.AtividadeEntrevista.DAL
         }
 
         /// <summary>
-        /// Inclui um novo beneficiario
+        /// Altera o beneficiario
         /// </summary>
         /// <param name="beneficiario">Objeto de beneficiario</param>
         internal void Alterar(DML.Beneficiario beneficiario)
@@ -118,7 +122,7 @@ namespace FI.AtividadeEntrevista.DAL
         /// <summary>
         /// Excluir Beneficiario
         /// </summary>
-        /// <param name="beneficiario">Objeto de beneficiario</param>
+        /// <param name="is">Id do Beneficiário</param>
         internal void Excluir(long id)
         {
             List<System.Data.SqlClient.SqlParameter> parametros = new List<System.Data.SqlClient.SqlParameter>();
@@ -127,7 +131,11 @@ namespace FI.AtividadeEntrevista.DAL
 
             base.Executar("FI_SP_DelBeneficiario", parametros);
         }
-
+        /// <summary>
+        /// Converte um DataSet em uma lista de objetos do tipo DML.Beneficiario.
+        /// </summary>
+        /// <param name="ds">O DataSet contendo os dados a serem convertidos.</param>
+        /// <returns>Uma lista de objetos do tipo DML.Beneficiario.</returns>
         private List<DML.Beneficiario> Converter(DataSet ds)
         {
             List<DML.Beneficiario> lista = new List<DML.Beneficiario>();
