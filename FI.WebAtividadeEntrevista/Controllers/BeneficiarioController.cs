@@ -19,34 +19,25 @@ namespace WebAtividadeEntrevista.Controllers
         [HttpGet]
         public ActionResult Incluir(int idCliente)
         {
-            BoBeneficiario boBeneficiario = new BoBeneficiario();
-            var benList = boBeneficiario.Listar(idCliente);
-            ClienteModel cliente = new ClienteModel()
-            {
-                Id = idCliente,
-                Beneficiarios=new List<BeneficiarioModel>()
-            };
-            foreach (var ben in benList)
-            {
-                cliente.Beneficiarios.Add(new BeneficiarioModel()
-                {
-                    Id = ben.Id,
-                    Nome = ben.Nome,
-                    Cpf = ben.Cpf,
-                    IdCliente = ben.IdCliente,
-                });
-            }
-            return View(cliente);
+            return View();
         }
 
         [HttpPost]
         public JsonResult Incluir(BeneficiarioModel model)
         {
             BoBeneficiario bo = new BoBeneficiario();
-            if (!bo.VerificaValidade(model.Cpf))
+            bool isValidCPF = bo.VerificaValidade(model.Cpf);
+            bool isNewCPF = bo.IsNewCPF(model.Cpf, model.IdCliente);
+
+            if (!isValidCPF)
+            {
+                ModelState.AddModelError("Cpf", "CPF inválido.");
+            }
+            if (!isNewCPF)
             {
                 ModelState.AddModelError("Cpf", "CPF já cadastrado.");
             }
+
             if (!this.ModelState.IsValid)
             {
                 List<string> erros = (from item in ModelState.Values
@@ -119,34 +110,33 @@ namespace WebAtividadeEntrevista.Controllers
             return View(model);
         }
 
-        [HttpPost]
-        public JsonResult BeneficiarioList(long idCliente,int jtStartIndex = 0, int jtPageSize = 0, string jtSorting = null)
+        [HttpGet]
+        public JsonResult BeneficiarioList(long id)
         {
             try
             {
-                int qtd = 0;
-                string campo = string.Empty;
-                string crescente = string.Empty;
-                string[] array = jtSorting.Split(' ');
+                List<Beneficiario> beneficiarios = new BoBeneficiario().Listar(id);
+                List<BeneficiarioModel> model = new List<BeneficiarioModel>();
+                foreach (var ben in beneficiarios)
+                {
+                    model.Add(new BeneficiarioModel()
+                    {
+                        Id = ben.Id,
+                        Cpf = ben.Cpf,
+                        Nome = ben.Nome,
+                        IdCliente = ben.IdCliente
+                    });
+                }
 
-
-                if (array.Length > 0)
-                    campo = array[0];
-
-                if (array.Length > 1)
-                    crescente = array[1];
-
-                List<Beneficiario> beneficiarios = new BoBeneficiario().Pesquisa(jtStartIndex, jtPageSize, campo, crescente.Equals("ASC", StringComparison.InvariantCultureIgnoreCase), out qtd,idCliente);
-
-                //Return result to jTable
-                return Json(new { Result = "OK", Records = beneficiarios, TotalRecordCount = qtd });
+                return Json(model, JsonRequestBehavior.AllowGet);
             }
             catch (Exception ex)
             {
                 return Json(new { Result = "ERROR", Message = ex.Message });
             }
         }
-        public ActionResult Excluir(long id)
+        [HttpPost]
+        public JsonResult Excluir(long id)
         {
             BoBeneficiario bo = new BoBeneficiario();
             Beneficiario beneficiario = bo.Consultar(id);
@@ -154,8 +144,9 @@ namespace WebAtividadeEntrevista.Controllers
             if (beneficiario != null)
             {
                 bo.Excluir(id);
+                return Json($"Beneficiário {beneficiario.Nome } excluído com sucesso");
             }
-            return RedirectToAction("Index", "Cliente");
+            return Json("Erro");
         }
     }
 }

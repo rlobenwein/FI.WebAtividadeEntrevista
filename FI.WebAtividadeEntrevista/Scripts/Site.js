@@ -47,3 +47,28 @@
 
     return true
 }
+
+function mascaraCpf(cpf) {
+    cpf = cpf.replace(/\D/g, '');
+    if (cpf.length > 9) return cpf.replace(/(\d{3})(\d{3})(\d{3})(\d{2})/, '$1.$2.$3-$4');
+    if (cpf.length > 6) return cpf.replace(/(\d{3})(\d{3})(\d{3})/, '$1.$2.$3');
+    if (cpf.length > 3) return cpf.replace(/(\d{3})(\d{3})/, '$1.$2');
+    return cpf;
+}
+
+$(document).ready(function () {
+    $('.CPF').on('input', function () {
+        var cpf = $(this).val();
+        $(this).val(mascaraCpf(cpf));
+    });
+
+    $('.CPF').on('blur', function () {
+        var cpf = $(this).val();
+        var isValid = validaCPF(cpf);
+        console.log(`CPF ${cpf}`, isValid ? "válido" : "inválido");
+        if (!isValid && cpf.length > 0) {
+            alert(`CPF ${cpf} inválido!`);
+        }
+
+    });
+});

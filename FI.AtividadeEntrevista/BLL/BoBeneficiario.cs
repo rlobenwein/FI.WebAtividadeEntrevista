@@ -70,14 +70,14 @@ namespace FI.AtividadeEntrevista.BLL
         }
 
         /// <summary>
-        /// VerificaExistencia
+        /// Verifica se o CPF já está cadastrado para o cliente
         /// </summary>
-        /// <param name="CPF"></param>
+        /// <param name="cpf"></param>
         /// <returns></returns>
-        public bool VerificarExistencia(string CPF)
+        public bool IsNewCPF(string cpf, long idCliente)
         {
-            DaoBeneficiario ben = new DaoBeneficiario();
-            return ben.VerificarExistencia(CPF);
+            IValidadorCpf validaCpf = new ValidadorCpf();
+            return validaCpf.IsNewCPF(cpf,idCliente);
         }
         /// <summary>
         /// Verifica se o CPF é válido

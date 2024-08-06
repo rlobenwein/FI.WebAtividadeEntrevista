@@ -9,5 +9,6 @@ namespace FI.AtividadeEntrevista.Interfaces
     public interface IValidadorCpf
     {
         bool IsValid(string cpf);
+        bool IsNewCPF(string cpf, long idCliente);
     }
 }

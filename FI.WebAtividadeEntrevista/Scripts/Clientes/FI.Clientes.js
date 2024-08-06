@@ -3,7 +3,18 @@ $(document).ready(function () {
 
     $('#formCadastroCliente').submit(function (e) {
         e.preventDefault();
-        if (validaCPF($(this).find("#CPF").val())) {
+        var cpf = $(this).find("#CPF").val().replace(/\D/g, '');
+        if (!validaCPF(cpf)) {
+            alert('CPF inválido');
+            return;
+        }
+
+        if (cpfExiste(cpf)) {
+            alert('CPF já cadastrado');
+            return;
+        }
+
+        if (validaCPF(cpf) && !cpfExiste(cpf)) {
             $.ajax({
                 url: urlPost,
                 method: "POST",
@@ -17,7 +28,7 @@ $(document).ready(function () {
                     "Cidade": $(this).find("#Cidade").val(),
                     "Logradouro": $(this).find("#Logradouro").val(),
                     "Telefone": $(this).find("#Telefone").val(),
-                    "Cpf": $(this).find("#CPF").val()
+                    "Cpf": cpf
                 },
                 error:
                     function (r) {
@@ -40,7 +51,6 @@ $(document).ready(function () {
 })
 
 function ModalDialogCli(titulo, texto) {
-    console.log("Modal Open Cli new");
     var random = Math.random().toString().replace('.', '');
     var texto = '<div id="' + random + '" class="modal fade">                                                               ' +
         '        <div class="modal-dialog">                                                                                 ' +
@@ -62,4 +72,32 @@ function ModalDialogCli(titulo, texto) {
 
     $('body').append(texto);
     $('#' + random).modal('show');
+}
+
+function cpfExiste(cpf) {
+    cpf = cpf.replace(/\D/g, '');
+    var resp = false;
+    $.ajax({
+        url: 'CpfExiste',
+        method: "POST",
+        data: {
+            "cpf": cpf,
+        },
+        error:
+            function (r) {
+                if (r.status == 400) {
+                    ModalDialogBen("Ocorreu um erro", r.responseJSON);
+                    console.log(r.responseJSON);
+                }
+                else if (r.status == 500)
+                    ModalDialogBen("Ocorreu um erro", "Ocorreu um erro interno no servidor.");
+            },
+        success:
+            function (r) {
+                resp = r;
+                console.log('cpfExiste', resp);
+            }
+    });
+
+    return resp;
 }

@@ -1,4 +1,5 @@
-﻿using FI.AtividadeEntrevista.Interfaces;
+﻿using FI.AtividadeEntrevista.BLL;
+using FI.AtividadeEntrevista.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,6 +10,26 @@ namespace FI.AtividadeEntrevista.Utilities
 {
     public class ValidadorCpf : IValidadorCpf
     {
+        /// <summary>
+        /// Verifica se o CPF é novo para o cliente.
+        /// </summary>
+        /// <param name="cpf"></param>
+        /// <param name="idCliente"></param>
+        /// <returns>True se o CPF é novo</returns>
+        /// <returns>Falso se o CPF já existe para o cliente</returns>
+        public bool IsNewCPF(string cpf, long idCliente)
+        {
+            BoBeneficiario boBeneficiario = new BoBeneficiario();
+            var benList = boBeneficiario.Listar(idCliente);
+
+            if (benList.Any(x => x.Cpf == cpf))
+            {
+                return false;
+            }
+
+            return true;
+        }
+
         public bool IsValid(string cpf)
         {
             int soma = 0;

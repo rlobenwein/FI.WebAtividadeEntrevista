@@ -1,6 +1,5 @@
 ﻿
 <form id="formCadastroCliente" method="post">
-    <input required="required" type="hidden" id="Id" name="Id">
     <div class="row">
         <div class="col-md-6">
             <div class="form-group">
@@ -19,7 +18,7 @@
         <div class="col-md-6">
             <div class="form-group">
                 <label for="Cpf">CPF:</label>
-                <input required="required" type="text" class="form-control" id="CPF" name="CPF" placeholder="Ex.: 010.011.111-00" maxlength="50">
+                <input required="required" type="text" class="form-control CPF" id="CPF" name="CPF" placeholder="Ex.: 010.011.111-00" maxlength="50">
             </div>
         </div>
         <div class="col-md-6">
@@ -87,13 +86,60 @@
                 </div>
                 @if (Model != null)
                 {
-                    @Html.ActionLink("Beneficiarios", "Incluir", "Beneficiario", new { idCliente = Model.Id }, new
-                    {
-                        @class = "btn btn-sm btn-primary pull-left",
-                    })
+                    <input type="hidden" id="Id" name="Id" value="@Model.Id">
+                    <div class="pull-left">
+                        <button type="button" class="btn btn-sm btn-primary" id="modalBeneficiarios">Beneficiários</button>
+                    </div>
                 }
             </div>
         </div>
     </div>
 
 </form>
+<div id="modalBeneficiarioForm" class="modal fade" role="dialog" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="modal-title">Beneficiários</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form id="formCadastroBeneficiario">
+                    <input type="hidden" class="form-control" id="idBen" name="idBen" value="-1">
+                    <div class="row">
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label for="CPFBen">CPF:</label>
+                                <input required="required" type="text" class="form-control CPF" id="CPFBen" name="CPFBen" placeholder="Ex.: 010.011.111-00" maxlength="14">
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label for="nomeBen">Nome:</label>
+                                <input required="required" type="text" class="form-control" id="nomeBen" name="nomeBen" placeholder="Ex.: Maria" maxlength="50">
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div style="padding-top: 26px;" class="form-group">
+                                <button type="submit" id="insBen" class="btn btn-success">Incluir</button>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+                <table id="benTable" class="table">
+                    <thead>
+                        <tr>
+                            <th scope="col">CPF</th>
+                            <th scope="col" style="width: 225px;">Nome</th>
+                            <th scope="col">Opções</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>

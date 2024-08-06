@@ -30,25 +30,23 @@ namespace FI.WebAtividadeEntrevista
                       "~/Scripts/jtable/localization/jquery.jtable.pt-BR.js"));
 
             bundles.Add(new ScriptBundle("~/bundles/clientes").Include(
-                      "~/Scripts/Clientes/FI.Clientes.js").Include("~/Scripts/Site.js"));
+                      "~/Scripts/Clientes/FI.Clientes.js", "~/Scripts/Site.js", "~/Scripts/Beneficiarios/FI.Beneficiarios.js"));
 
             bundles.Add(new ScriptBundle("~/bundles/listClientes").Include(
                       "~/Scripts/Clientes/FI.ListClientes.js"));
 
             bundles.Add(new ScriptBundle("~/bundles/altClientes").Include(
-                      "~/Scripts/Clientes/FI.AltClientes.js"));
+                      "~/Scripts/Clientes/FI.AltClientes.js", 
+                      "~/Scripts/Site.js",
+                      "~/Scripts/Beneficiarios/FI.AltBeneficiarios.js", 
+                      "~/Scripts/Beneficiarios/FI.DelBeneficiarios.js", 
+                      "~/Scripts/Beneficiarios/FI.Beneficiarios.js"));
 
             bundles.Add(new ScriptBundle("~/bundles/beneficiarios").Include(
-                      "~/Scripts/Beneficiarios/FI.Beneficiarios.js").Include("~/Scripts/Site.js"));
+                      "~/Scripts/Beneficiarios/FI.Beneficiarios.js","~/Scripts/Site.js"));
 
             bundles.Add(new ScriptBundle("~/bundles/listBeneficiarios").Include(
                       "~/Scripts/Beneficiarios/FI.ListBeneficiarios.js"));
-
-            bundles.Add(new ScriptBundle("~/bundles/altBeneficiarios").Include(
-                      "~/Scripts/Beneficiarios/FI.AltBeneficiarios.js"));
-
-            bundles.Add(new ScriptBundle("~/bundles/delBeneficiarios").Include(
-                      "~/Scripts/Beneficiarios/FI.DelBeneficiarios.js"));
 
             bundles.Add(new StyleBundle("~/Content/css").Include(
                       "~/Content/bootstrap.css",

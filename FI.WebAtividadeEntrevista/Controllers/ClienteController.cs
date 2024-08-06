@@ -23,10 +23,17 @@ namespace WebAtividadeEntrevista.Controllers
         public JsonResult Incluir(ClienteModel model)
         {
             BoCliente bo = new BoCliente();
-            if (!bo.VerificaValidade(model.Cpf))
+            bool isValid = bo.VerificaValidade(model.Cpf);
+            bool isNew = !CpfExiste(model.Cpf);
+            if (!isValid)
             {
                 ModelState.AddModelError("Cpf", "CPF inválido.");
             }
+            if (!isNew)
+            {
+                ModelState.AddModelError("Cpf", "CPF já cadastrado.");
+            }
+
 
             if (!this.ModelState.IsValid)
             {
@@ -154,9 +161,7 @@ namespace WebAtividadeEntrevista.Controllers
                     crescente = array[1];
 
                 List<Cliente> clientes = new BoCliente().Pesquisa(jtStartIndex, jtPageSize, campo, crescente.Equals("ASC", StringComparison.InvariantCultureIgnoreCase), out qtd, isForIndex);
-                //List<Cliente> clientes = new BoCliente().Pesquisa(jtStartIndex, jtPageSize, campo, crescente.Equals("ASC", StringComparison.InvariantCultureIgnoreCase), out qtd);
 
-                //Return result to jTable
                 return Json(new { Result = "OK", Records = clientes, TotalRecordCount = qtd });
             }
             catch (Exception ex)
@@ -164,5 +169,12 @@ namespace WebAtividadeEntrevista.Controllers
                 return Json(new { Result = "ERROR", Message = ex.Message });
             }
         }
+        [HttpPost]
+        public bool CpfExiste(string cpf)
+        {
+            var boCliente = new BoCliente();
+            return boCliente.VerificarExistencia(cpf);
+        }
+
     }
 }
