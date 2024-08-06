@@ -1,6 +1,7 @@
 # Função Sistemas - Processo seletivo - teste prático
-## Vaga: Desenvolvedor Full-Stack .NET - Passos para solução do problema:
-
+## Vaga: Desenvolvedor Full-Stack .NET - Candidato: Rodrigo Lobenwein
+## Status: concluído
+## Passos para solução do problema:
 ### Backend
 
 1. Modelos
@@ -139,7 +140,7 @@ END;
 ```
 
 ### Frontend
-- Criar a tela beneficiarios
+- Criar a tela beneficiarios (modal)
 - Alterar a tela de clientes para incluir o botão beneficiarios e o campo de cpf. Botão Beneficiários somente na tela de alterar Cliente (é necessário que o cliente já exista para cadastrar um Beneficiário)
 - Incluir scripts para beneficiarios
 - Incluir script de validação do cpf no front
@@ -195,7 +196,3 @@ function validaCPF(cpf) {
     return true
 }
 ```
-
-## Próximos passos
-- Colocar o cadastro de beneficiários em modal na tela de alterar Cliente.
-- Incluir máscara nos campos de CPF para exibir a formatação "000.000.000-00", mas permitir a entrada somente de números
